@@ -25,6 +25,7 @@ module.exports = {
     "import/no-extraneous-dependencies": "off",
     "import/extensions": "off",
     "no-multiple-empty-lines": "off",
+    "linebreak-style": "off"
 
     // "jsx-quotes": [1, "prefer-double"],
   }
