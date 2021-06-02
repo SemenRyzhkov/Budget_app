@@ -5,7 +5,7 @@
         <el-button class="all" type="primary" @click="switchFilter('ALL')"
           >Show all</el-button
         >
-        <el-button class="income" type="success" @click="switchFilter('INCOME')"
+        <el-button class="income" type="info" @click="switchFilter('INCOME')"
           >Income</el-button
         >
         <el-button
