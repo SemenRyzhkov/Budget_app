@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "ListItem",
   data: () => ({
@@ -31,7 +33,6 @@ export default {
     top: "el-icon-top",
     bottom: "el-icon-bottom"
   }),
-
   props: {
     item: {
       type: Object,
@@ -39,10 +40,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions("budgets", ["deleteIncome"]),
     deleteItem() {
       if (this.deleteItemId === null) return;
-      this.$emit("deleteItem", this.deleteItemId);
+      this.deleteIncome(this.deleteItemId);
       this.deleteItemId = null;
+      this.dialogVisible = false;
     },
     showDialog(id) {
       this.dialogVisible = true;

@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ListItem from './ListItem';
 
 export default {
@@ -33,12 +34,7 @@ export default {
   components: {
     ListItem,
   },
-  props: {
-    list: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
+
   data: () => ({
     header: 'Budget List',
     emptyTitle: 'Empty List',
@@ -48,13 +44,14 @@ export default {
     this.sortList('ALL');
   },
   computed: {
+    ...mapGetters('budgets', ['budgetList']),
     isEmpty() {
-      return !Object.keys(this.list).length;
+      return !Object.keys(this.budgetList).length;
     },
     sortedList() {
-      if (this.filter === 'ALL') return this.list;
+      if (this.filter === 'ALL') return this.budgetList;
 
-      const newArr = Object.entries(this.list).filter(
+      const newArr = Object.entries(this.budgetList).filter(
         ([, value]) => value.type === this.filter
       );
       return newArr.reduce((acc, [key, value]) => {
@@ -64,9 +61,6 @@ export default {
     },
   },
   methods: {
-    deleteItem(id) {
-      this.$emit('deleteItem', id);
-    },
     switchFilter(val) {
       switch (val) {
         case 'INCOME': {

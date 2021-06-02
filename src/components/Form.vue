@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Form",
   data() {
@@ -57,11 +59,12 @@ export default {
     };
   },
   methods: {
+    ...mapActions("budgets", ["addNewIncome"]),
     onSubmit() {
       this.$refs.addItemForm.validate(valid => {
         if (valid) {
           this.formData.value = this.absValue(this.formData.value);
-          this.$emit("submitForm", { ...this.formData });
+          this.addNewIncome(this.formData);
           this.$refs.addItemForm.resetFields();
         }
       });
